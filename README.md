@@ -7,7 +7,7 @@ The system is implemented in [PyTorch](https://github.com/pytorch/pytorch) with 
 * chED+subwSELF-ATT: chED model with additional _self-attention_ mechanism over _subwords_
 * chED+chSELF-ATT: chED model with additional _self-attention_ mechanism over _characters_
 
-![Image of chED+subwSELF-ATT]()
+![Image of chED+subwSELF-ATT](https://github.com/tatyana-ruzsics/interpretable-inflection/blob/main/subw-self-att.png)
 
 ## Installation
 ```shell-session
