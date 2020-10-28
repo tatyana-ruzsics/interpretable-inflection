@@ -59,7 +59,7 @@ beam=1
 test=path/to/test/file
 
 # pointers to segmented test data
-test_segm=$data_dir_bpe/test_segm
+test_segm=path/to/segmented/test/file
 
 ##### subword-level model (chED+subwSELF-ATT) #####
 # pointers to pretrained models
