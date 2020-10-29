@@ -10,6 +10,7 @@ The system is implemented in [PyTorch](https://github.com/pytorch/pytorch) with 
 ![Image of chED+subwSELF-ATT](https://github.com/tatyana-ruzsics/interpretable-inflection/blob/main/subw-self-att.png)
 
 ## Installation
+Install pytorch v>=1.2 and additional python requirments:
 ```shell-session
 pip install -r requirements.txt
 ```
