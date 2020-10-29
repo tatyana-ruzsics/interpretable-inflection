@@ -4,4 +4,4 @@ torchtext
 PyYAML
 jupyter
 cython
-torchsparseattn
+torchsparseattn==0.2
