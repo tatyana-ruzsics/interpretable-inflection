@@ -6,7 +6,7 @@ beam=$3
 
 ####################################################################################################
 
-evalset=$(basename $datapath)
+evalset=$(basename $test)
 model=$( python best_model.py $modeldir/*.pt )
 echo $model
 preddir=$modeldir/predict
