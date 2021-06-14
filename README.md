@@ -1,5 +1,5 @@
-# Neural seq2seq tools for morphological processing
-This repo contains seq2seq models for morphological processing, adapted to the task of morphological inflection.
+# Interpretability for Morphological Inflection: from Character-level Predictions to Subword-level Rules
+This repo contains seq2seq models for the task of morphological inflection for extraction of inflection patterns (see EACL 2021 [paper](https://www.aclweb.org/anthology/2021.eacl-main.278.pdf))
 The system is implemented in [PyTorch](https://github.com/pytorch/pytorch) with a codebase derived from [OpenNMT-py](https://github.com/deep-spin/OpenNMT-entmax) adaptation for this task at http://github.com/deep-spin/SIGMORPHON2019. 
 
 ## Supported Models
@@ -16,7 +16,7 @@ pip install -r requirements.txt
 ```
 
 ## Training models
-Use provided `train-subw.sh` file to train subword-level model (chED+subwSELF-ATT) and `train-ch.sh` file to train character-level models (chED, chED+chSELF-ATT). Both files require paths to model, train and development files as arguments. In the subword-level setting, aditional segmented form of the data is required which can be produced with a provided script `bpe-preprocess.sh`. An example of training all three models:
+Use provided `train-subw.sh` file to train subword-level model (chED+subwSELF-ATT) and `train-ch.sh` file to train character-level models (chED, chED+chSELF-ATT). Both files require paths to model directory (where trained models will be saved), model configuration, train and development files as arguments. In the subword-level setting, aditional segmented form of the data is required which can be produced with a provided script `bpe-preprocess.sh`. An example of training all three models:
 
 ```shell-session
  
@@ -44,11 +44,13 @@ test_segm=path/to/save/segmented/test/file
 
 ##### subword-level model (chED+subwSELF-ATT) #####
 model_dir_subw=path/to/save/model
-./train-subw.sh $model_dir_subw $train $train_segm $dev $dev_segm
+./train-subw.sh $model_dir_subw $train $train_segm $dev $dev_segm config/gate-sparse-enc-static-head.yml
 
 ###### character-level models (chED, chED+chSELF-ATT) #####
 model_dir_ch=path/to/save/model
-./train-ch.sh $model_dir_ch $train $dev
+./train-ch.sh $model_dir_ch $train $dev config/gate-sparse.yml # chED model
+./train-ch.sh $model_dir_ch $train $dev config/gate-sparse-enc-static-head.yml # chED+chSELF-ATT model
+
 ```
 ## Evaluating models
 Use provided `translate-subw.sh` file to train subword-level model (chED+subwSELF-ATT) and `translate-ch.sh` file to train character-level models (chED, chED+chSELF-ATT). Both files require paths to pretrained models and test file as arguments. In the subword-level setting, aditional segmented form of the data is required. An example of running evaluation all three models:
@@ -72,3 +74,8 @@ modeldir=/path/to/models
 modeldir=/path/to/models
 ./translate-ch.sh $modeldir $test $beam 
 ```
+## Patterns extraction
+Inflection patterns can be extracted using `msd2pattern` function for 'transformation' patterns and `msd2decision` function for 'lemma' patterns in `pattern-extraction/patterns.py` file. See examples of usage in notebooks `pattern-extraction/Pattern-extr-*` replicating examples from the paper.
+
+## EACL 2021 experiments
+Instructions for training and evaluating the models from the paper are provided in the files `commands-eacl-exp-train.sh` and `commands-eacl-exp-eval.sh`. Replication might differ due to not fixed seed in the experiments (inhereted from the code base), therefore we provide best model checkpoints in the repo. In the current implementation shared in this repo, the seed is fixed now by default.
